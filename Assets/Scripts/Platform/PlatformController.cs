@@ -47,7 +47,25 @@ public class PlatformController : MonoBehaviour
     /// </summary>
     private void ShootBall()
     {
-        Debug.Log("Shooting");
+        // vector direction for the force and force magnitude
+        float forceDirectionX = 1.0f;
+        float forceDirectionY = 1.7f;
+        float launchForce = 10.0f;
+
+        // check if the platform has a ball or not
+        if (holdingArea.childCount != 0)
+        {
+            spawnedBall.parent = null;
+            spawnedBallRb.bodyType = RigidbodyType2D.Dynamic;
+            
+            Vector2 forceVector = new Vector2(forceDirectionX, Random.Range(-forceDirectionY, forceDirectionY));
+            spawnedBallRb.AddForce(forceVector.normalized * launchForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            // there is no ball to shoot
+            return;
+        }
     }
 
     /// <summary>
