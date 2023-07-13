@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class PlatformController : MonoBehaviour
+public class MainPlatform : Platform
 {
-    [SerializeField] private Transform holdingArea;         // referance to the holding area
+    [SerializeField] private Transform holdingArea;               // referance to the holding area
     [SerializeField] private Transform ballPrefab;                // referance to the ballprefab
-    
-    // reference to the input]
-    [SerializeField] private SO_InputTracker inputTracker;
-    private float moveDirection;
-
-    // platform movement speed
-    [SerializeField] private float moveSpeed = 6;
 
     // the spawned ball transform and rigidbody2d referances
     private Transform spawnedBall;
@@ -33,16 +26,6 @@ public class PlatformController : MonoBehaviour
     //----------------------------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// Move the platform
-    /// </summary>
-    private void Move()
-    {
-        Vector3 moveVector = new Vector3(0.0f, moveDirection, 0.0f);
-
-        transform.position += moveVector * Time.deltaTime * moveSpeed;
-    }
-
-    /// <summary>
     /// Shoot the ball when the player hit space
     /// </summary>
     private void ShootBall()
@@ -58,7 +41,7 @@ public class PlatformController : MonoBehaviour
             // change the body type of the ball and release it from holding area
             spawnedBall.parent = null;
             spawnedBallRb.bodyType = RigidbodyType2D.Dynamic;
-            
+
             // add shooting force to the ball
             Vector2 forceVector = new Vector2(forceDirectionX, Random.Range(-forceDirectionY, forceDirectionY));
             spawnedBallRb.AddForce(forceVector.normalized * launchForce, ForceMode2D.Impulse);
