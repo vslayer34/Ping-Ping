@@ -9,11 +9,11 @@ public class MainPlatform : Platform
     private Transform spawnedBall;
     private Rigidbody2D spawnedBallRb;
 
-
     private void Start()
     {
         inputTracker.OnShoot += ShootBall;
         SetUpTheBall();
+        IsImmune = true;
     }
 
     private void Update()
