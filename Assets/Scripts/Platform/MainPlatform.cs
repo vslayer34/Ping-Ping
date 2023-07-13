@@ -18,9 +18,12 @@ public class MainPlatform : Platform
 
     private void Update()
     {
-        // updating the user input and handling the movement
-        moveDirection = inputTracker.userInput;
-        Move();
+        if (status == Status.ACTIVE)
+        {
+            // updating the user input and handling the movement
+            moveDirection = inputTracker.userInput;
+            Move();
+        }
     }
 
     //----------------------------------------------------------------------------------------------------------------------
@@ -51,6 +54,8 @@ public class MainPlatform : Platform
             // there is no ball to shoot
             return;
         }
+
+        status = Status.INACTIVE;
     }
 
     /// <summary>
