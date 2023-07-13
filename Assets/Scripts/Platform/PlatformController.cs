@@ -55,9 +55,11 @@ public class PlatformController : MonoBehaviour
         // check if the platform has a ball or not
         if (holdingArea.childCount != 0)
         {
+            // change the body type of the ball and release it from holding area
             spawnedBall.parent = null;
             spawnedBallRb.bodyType = RigidbodyType2D.Dynamic;
             
+            // add shooting force to the ball
             Vector2 forceVector = new Vector2(forceDirectionX, Random.Range(-forceDirectionY, forceDirectionY));
             spawnedBallRb.AddForce(forceVector.normalized * launchForce, ForceMode2D.Impulse);
         }
